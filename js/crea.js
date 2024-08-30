@@ -1,3 +1,5 @@
+import { startLoading, stopLoading } from "./confirm-card";
+
 const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEyOGVhMjVmOGJkODAwMTUyZjhjZTIiLCJpYXQiOjE3MjQ5NTQ0NTMsImV4cCI6MTcyNjE2NDA1M30.wdRlTQpOsy0fTiRTjzqmoQ1kMVftrhHgccQrHUg3JkI";
 
 const crea = document.getElementById("btnCrea");
@@ -8,7 +10,6 @@ crea.addEventListener("click", (e) => {
   const brand = document.getElementById("brand").value
   const description = document.getElementById("description").value;
   const price = document.getElementById('price').value; 
-  const validation = document.getElementById('validation').checked;
   const imageUrl = document.getElementById('imageUrl').value;
 
   const product = {
@@ -16,7 +17,6 @@ crea.addEventListener("click", (e) => {
     brand: brand,
     description: description,
     price: Number(price),
-    validation : validation,
     imageUrl : imageUrl,
   };
 
@@ -24,6 +24,8 @@ crea.addEventListener("click", (e) => {
 })
 
 async function call(product) {
+startLoading()
+
     const response = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
       method: 'POST',
       headers: {
@@ -36,9 +38,18 @@ async function call(product) {
 
     const data = await response.json();
     console.log(data);
-    
-}
 
+    Swal.fire({
+      title: "Fatto!",
+      text: "Prodotto creato con successo!",
+      icon: "success"
+    }).then(()=>{
+        stopLoading()
+      })
+
+ 
+
+}
 
 
 
