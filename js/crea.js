@@ -1,6 +1,9 @@
-import { startLoading, stopLoading } from "./confirm-card";
+/*import { startLoading, stopLoading } from "./.js/confirm-card.js"*/
 
 const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmEyOGVhMjVmOGJkODAwMTUyZjhjZTIiLCJpYXQiOjE3MjQ5NTQ0NTMsImV4cCI6MTcyNjE2NDA1M30.wdRlTQpOsy0fTiRTjzqmoQ1kMVftrhHgccQrHUg3JkI";
+
+const URL = "https://striveschool-api.herokuapp.com/api/product/" ;
+
 
 const crea = document.getElementById("btnCrea");
 
@@ -24,9 +27,9 @@ crea.addEventListener("click", (e) => {
 })
 
 async function call(product) {
-startLoading()
 
-    const response = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
+
+    const response = await fetch(`${URL}`, {
       method: 'POST',
       headers: {
         "Content-Type" : "application/json",
@@ -38,16 +41,14 @@ startLoading()
 
     const data = await response.json();
     console.log(data);
-
+/*
     Swal.fire({
       title: "Fatto!",
       text: "Prodotto creato con successo!",
       icon: "success"
     }).then(()=>{
         stopLoading()
-      })
-
- 
+      })*/
 
 }
 
